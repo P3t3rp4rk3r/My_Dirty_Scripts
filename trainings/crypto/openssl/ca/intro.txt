@@ -1,0 +1,26 @@
+Generate root CA and Store as a ca.key
+
+openssl genrsa -out ca.key 4096
+
+create selfsigned root CA ca.crt
+
+openssl req -new -x509 -days 1826 -key ca.key -out ca.crt
+
+generate subordinate CA 
+
+openssl genrsa -out ia.key 4096
+
+request a certificate for this subordinate CA
+
+openssl req -new -key ia.key -out ia.csr
+
+subordinate CA cert and get it signed by the root CA
+
+openssl x509 -req -days 730 -in ia.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out ia.crt
+
+subordinate cA key for authenticatecode signature with microsoft signtool , pkcs12 file.
+
+openssl pkcs12 -export -out ia.p12 -inkey ia.key -in ia.crt -chain -CAfile ca.crt
+
+PE file generated : ia.p12
+

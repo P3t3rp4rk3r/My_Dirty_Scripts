@@ -1,0 +1,23 @@
+*Sep  4 10:07:40.135: EST: %LINEPROTO-5-UPDOWN: Line protocol on Interface IPv6-mpls, changed state to up
+*Sep  4 10:07:41.135: EST: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+*Sep  4 10:07:41.135: EST: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+*Sep  4 05:07:42.519 EST: %SSH-5-DISABLED: SSH 1.99 has been disabled
+*Sep  4 05:07:43.575 EST: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback1, changed state to up
+*Sep  4 05:07:43.607 EST: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback10, changed state to up
+*Sep  4 05:07:43.651 EST: %LINEPROTO-5-UPDOWN: Line protocol on Interface Tunnel0, changed state to down
+*Sep  4 05:07:43.807 EST: %LINEPROTO-5-UPDOWN: Line protocol on Interface NVI0, changed state to up
+*Sep  4 05:07:44.679 EST: %LINK-5-CHANGED: Interface Tunnel0, changed state to administratively down
+*Sep  4 05:07:56.627 EST: %SYS-5-CONFIG_I: Configured from memory by console
+*Sep  4 05:07:57.203 EST: %SYS-5-RESTART: System restarted --
+Cisco IOS Software, 1841 Software (C1841-ADVENTERPRISEK9-M), Version 12.4(15)T12, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Fri 22-Jan-10 00:35 by prod_rel_team
+*Sep  4 05:07:57.203 EST: %SNMP-5-COLDSTART: SNMP agent on host R1 is undergoing a cold start
+*Sep  4 05:07:57.259 EST: %SSH-5-ENABLED: SSH 1.99 has been enabled
+*Sep  4 05:07:57.535 EST: %LINK-3-UPDOWN: Interface Virtual-Access1, changed state to up
+*Sep  4 05:07:58.903 EST: %LINEPROTO-5-UPDOWN: Line protocol on Interface Virtual-Access1, changed state to up
+Sep  6 11:57:00.021 EST: %DHCPD-4-PING_CONFLICT: DHCP address conflict:  server pinged 192.168.1.42.
+Sep 14 11:44:51.710 EST: %DHCPD-4-PING_CONFLICT: DHCP address conflict:  server pinged 192.168.1.249.
+Sep 20 18:06:27.586 EST: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.1.50)
+Sep 20 18:07:37.735 EST: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.1.50)

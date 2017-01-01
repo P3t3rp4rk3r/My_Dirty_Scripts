@@ -1,0 +1,9 @@
+we will print $5. Only the last 4 lines are being shown for brevity.
+
+cat cisco.log | awk '{print $5}' | tail -n 4
+
+Looking at a large file would still produce a large amount of output. A more useful thing to do might be to output every entry found in “$5”, group them together, count them, then sort them from the greatest to least number of occurrences. This can be done by piping the output through “sort“, using “uniq -c” to count the like entries, then using “sort -rn” to sort it in reverse order.
+
+cat cisco.log | awk '{print $5}'| sort | uniq -c | sort -rn
+
+

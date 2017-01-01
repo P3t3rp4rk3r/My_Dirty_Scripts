@@ -1,0 +1,28 @@
+Log file: 
+
+It contains a record of the  events that indicates how the system processes were loaded.
+
+System Logs:
+system errors, warnings,startup messages, system changes, abnormal shutdowns
+
+Firewall Logs:
+Detect Unsuccessful logins
+suspecious outbound connections
+Packet analysis (Spoofing attacks)
+
+Routers & Network Device logs:
+logging events
+security alerts
+
+Example Log: IIS Server 
+#Software: Microsoft Internet Information Services 6.0
+#Version: 1.0
+#Date: 2009-06-11 05:12:03
+#Fields: date time s-sitename s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) sc-status sc-substatus sc-win32-status
+
+2009-06-11 05:12:02 W3SVC1893743816 192.168.1.109 GET / – 4677 – 192.168.1.109 Mozilla/4.0 (compatible;+MSIE+4.01;+Windows+NT;+MS+Search+5.0+Robot) 401 2 2148074254
+
+
+141.156.21.1-255
+
+

@@ -1,0 +1,10 @@
+echo 'this is the plain text' > plaintext.txt
+openssl enc -e -des3 -salt -in plaintext.txt -out ciphertext.bin
+
+hd ciphertext.bin
+
+openssl enc -d -des3 -in ciphertext.bin -out plaintext2.txt
+
+diff plaintext.txt plaintext2.txt
+
+

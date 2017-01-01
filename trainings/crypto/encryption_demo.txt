@@ -1,0 +1,109 @@
+####################
+# MD5 Hashing Demo #
+####################
+mkdir ~/demo
+cd ~/demo
+
+
+
+mkdir hashdemo
+cd hashdemo
+echo test > test.txt
+cat test.txt
+md5sum test.txt
+echo hello >> test.txt
+cat test.txt
+md5sum test.txt
+cd ..
+
+
+
+#################################
+# Symmetric Key Encryption Demo #
+#################################
+md5sum test.txt
+mkdir gpgdemo
+cd gpgdemo
+echo test > test.txt
+cat test.txt
+gpg -c test.txt
+	password
+	password
+ls | grep test
+cat test.txt
+cat test.txt.gpg
+rm -rf test.txt
+ls | grep test
+gpg -o output.txt test.txt.gpg
+
+
+##################################
+# Asymmetric Key Encryption Demo #
+##################################
+
+sudo apt-get install rng-tools
+
+/etc/init.d/rng-tools start
+
+sudo rngd -r /dev/urandom
+	santhosh
+
+
+echo hello > file1.txt
+echo goodbye > file2.txt
+echo green > file3.txt
+echo blue > file4.txt
+
+tar czf files.tar.gz *.txt
+
+gpg --gen-key
+	1
+	1024
+	0
+	y
+	Hellboy reboot
+	Hellboy@reboot.com
+	--blank comment--
+	O
+		password
+		password	
+
+
+
+gpg --armor --output file-enc-pubkey.txt --export 'Hellboy reboot'
+
+cat file-enc-pubkey.txt
+
+gpg --armor --output file-enc-privkey.asc --export-secret-keys 'Hellboy reboot'
+
+cat file-enc-privkey.asc
+
+gpg --encrypt --recipient 'Hellboy reboot' files.tar.gz
+
+rm -rf files.tar.gz *.txt
+
+tar -zxvf files.tar.gz.gpg
+
+gpg --output output.tar.gz --decrypt files.tar.gz.gpg
+	password
+
+tar -zxvf output.tar.gz
+
+
+############################
+# Encryption using OpenSSL #
+############################
+openssl genrsa -out private_key.pem 1024
+openssl rsa -in private_key.pem -out public_key.pem -outform PEM -pubout
+
+
+echo hello > encrypt.txt
+openssl rsautl -encrypt -inkey public_key.pem -pubin -in encrypt.txt -out encrypt.dat
+
+cat encrypt.dat
+
+rm -rf encrypt.dat
+
+openssl rsautl -decrypt -inkey private_key.pem -in encrypt.dat -out decrypt.txt
+
+cat decrypt.txt

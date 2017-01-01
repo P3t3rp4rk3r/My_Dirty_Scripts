@@ -1,0 +1,881 @@
+Training ( Linux for Information Security People)
+
+
+
+
+Basic Commands:
+
+pwd
+
+whereis
+
+which
+
+mkdir
+
+cd 
+
+touch
+
+ls 
+
+clear
+
+cat
+
+echo
+
+man
+
+wc
+
+ps
+
+top
+
+
+
+
+
+
+
+
+
+Practice Mode:
+
+pwd
+
+whereis pwd
+
+which pwd
+
+sudo find / -name pwd
+
+/bin/pwd
+
+mkdir test
+
+cd test
+
+touch one two three
+
+ls -l t		(without pressing the Enter key, press the Tab key twice. What happens?)
+
+h		(and again without pressing the Enter key, press the Tab key twice. What happens?)
+
+Press the 'Up arrow key'	(Whtwt happens?)
+
+Press 'Ctrl-A'			(What happens?)
+
+ls
+
+clear				(What happens?)
+
+echo one > one
+
+cat one				(What happens?)
+
+man cat				(What happens?)
+	qt 
+
+cat two
+
+cat one > two
+
+cat two
+
+cat one two > three
+
+cat three
+
+echo four >> three
+
+cat three 			(What happens?)
+
+wc -l three
+
+man wc
+	q
+
+cat three | grep four
+
+cat three | grep one
+
+man grep
+	q
+
+
+sudo grep eth[01] /etc/*	(What happens?)
+
+cat /etc/iftab
+
+
+man ps
+	q
+
+ps
+
+ps aux
+
+ps aux | less
+
+Press the 'Up arrow key'	(What happens?)
+
+Press the 'Down arrow key'	(What happens?)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What’s the distribution type? What version?
+-------------------------------------------
+cat /etc/issue
+cat /etc/*-release
+cat /etc/lsb-release      		# Debian based
+cat /etc/redhat-release   		# Redhat based
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What’s the kernel version? Is it 64-bit?
+-------------------------------------------
+cat /proc/version
+uname -a
+uname -mrs
+rpm -q kernel
+dmesg | grep Linux
+ls /boot | grep vmlinuz-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What can be learnt from the environmental variables?
+----------------------------------------------------
+cat /etc/profile
+cat /etc/bashrc
+cat ~/.bash_history
+cat ~/.bashrc
+cat ~/.bash_logout
+env
+set
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What services are running? Which service has which user privilege?
+------------------------------------------------------------------
+ps aux
+ps -ef
+top
+cat /etc/services
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Which service(s) are been running by root? Of these services, which are vulnerable - it’s worth a double check!
+---------------------------------------------------------------------------------------------------------------
+ps aux | grep root
+ps -ef | grep root
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What applications are installed? What version are they? Are they currently running?
+------------------------------------------------------------------------------------
+ls -alh /usr/bin/
+ls -alh /sbin/
+dpkg -l
+dpkg --get-selections | grep -v deinstall
+rpm -qa
+ls -alh /var/cache/apt/archives
+ls -alh /var/cache/yum/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Any of the service(s) settings misconfigured? Are any (vulnerable) plugins attached?
+------------------------------------------------------------------------------------
+cat /etc/rsyslog.conf
+cat /etc/apache2/apache2.conf 
+cat /etc/lighttpd/lighttpd.conf 
+cat /etc/cups/cupsd.conf
+cat /etc/inetd.conf
+cat /etc/my.conf
+cat /etc/httpd/conf/httpd.conf
+cat /opt/lampp/etc/httpd.conf
+ls -aRl /etc/ | awk '$1 ~ /^.*r.*/
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What jobs are scheduled?
+------------------------
+crontab -l
+ls -alh /var/spool/cron
+ls -al /etc/ | grep cron
+ls -al /etc/cron*
+cat /etc/cron*
+cat /etc/at.allow
+cat /etc/at.deny
+cat /etc/cron.allow
+cat /etc/cron.deny
+cat /etc/crontab
+cat /etc/anacrontab
+cat /var/spool/cron/crontabs/root
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Any plain text usernames and/or passwords?
+------------------------------------------
+grep -i user [filename]
+grep -i pass [filename]
+grep -C 5 "password" [filename]
+find . -name "*.php" -print0 | xargs -0 grep -i -n "var $password"   		# Search for Joomla passwords
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What NIC(s) does the system have? Is it connected to another network?
+---------------------------------------------------------------------
+/sbin/ifconfig -a
+cat /etc/network/interfaces 
+# cat /etc/sysconfig/network - CentOS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What are the network configuration settings? What can you find out about this network? DHCP server? DNS server? Gateway?
+------------------------------------------------------------------------------------------------------------------------
+cat /etc/resolv.conf
+cat /etc/sysconfig/network - CentOS
+cat /etc/networks
+iptables -L
+hostname
+dnsdomainname
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What other users & hosts are communicating with the system?
+-----------------------------------------------------------
+lsof -i
+lsof -i :80
+grep 80 /etc/services
+netstat -antup
+netstat -antpx
+netstat -tulpn
+chkconfig --list
+chkconfig --list | grep 3:on
+last
+w
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Whats cached? IP and/or MAC addresses
+-------------------------------------
+arp -e
+route
+/sbin/route -nee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Who are you? Who is logged in? Who has been logged in? Who else is there? Who can do what?
+------------------------------------------------------------------------------------------
+id
+who
+w
+last
+cat /etc/passwd | cut -d':' -f1    # List of users
+grep -v -E "^#" /etc/passwd | awk -F: '$3 == 0 { print $1}'   # List of super users
+awk -F: '($3 == "0") {print}' /etc/passwd   # List of super users
+cat /etc/sudoers
+sudo -l
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What sensitive files can be found?
+----------------------------------
+cat /etc/passwd
+cat /etc/group
+cat /etc/shadow
+ls -alh /var/mail/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Anything “interesting” in the home directorie(s)? If it’s possible to access
+----------------------------------------------------------------------------
+ls -ahlR /root/
+ls -ahlR /home/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Are there any passwords in; scripts, databases, configuration files or log files? Default paths and locations for passwords
+---------------------------------------------------------------------------------------------------------------------------
+cat /var/apache2/config.inc
+cat /var/lib/mysql/mysql/user.MYD
+cat /root/anaconda-ks.cfg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What has the user being doing? Is there any password in plain text? What have they been edting?
+-----------------------------------------------------------------------------------------------
+cat ~/.bash_history
+cat ~/.nano_history
+cat ~/.atftp_history
+cat ~/.mysql_history
+cat ~/.php_history
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What user information can be found?
+-----------------------------------
+cat ~/.bashrc
+cat ~/.profile
+cat /var/mail/root
+cat /var/spool/mail/root
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Can private-key information be found?
+-------------------------------------
+cat ~/.ssh/authorized_keys
+cat ~/.ssh/identity.pub
+cat ~/.ssh/identity
+cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_rsa
+cat ~/.ssh/id_dsa.pub
+cat ~/.ssh/id_dsa
+cat /etc/ssh/ssh_config
+cat /etc/ssh/sshd_config
+cat /etc/ssh/ssh_host_dsa_key.pub
+cat /etc/ssh/ssh_host_dsa_key
+cat /etc/ssh/ssh_host_rsa_key.pub
+cat /etc/ssh/ssh_host_rsa_key
+cat /etc/ssh/ssh_host_key.pub
+cat /etc/ssh/ssh_host_key
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Any settings/files (hidden) on website? Any settings file with database information?
+------------------------------------------------------------------------------------
+ls -alhR /var/www/
+ls -alhR /srv/www/htdocs/
+ls -alhR /usr/local/www/apache22/data/
+ls -alhR /opt/lampp/htdocs/
+ls -alhR /var/www/html/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	
+Is there anything in the log file(s) (Could help with “Local File Includes”!)
+-----------------------------------------------------------------------------
+cat /etc/httpd/logs/access_log
+cat /etc/httpd/logs/access.log
+cat /etc/httpd/logs/error_log
+cat /etc/httpd/logs/error.log
+cat /var/log/apache2/access_log
+cat /var/log/apache2/access.log
+cat /var/log/apache2/error_log
+cat /var/log/apache2/error.log
+cat /var/log/apache/access_log
+cat /var/log/apache/access.log
+cat /var/log/auth.log
+cat /var/log/chttp.log
+cat /var/log/cups/error_log
+cat /var/log/dpkg.log
+cat /var/log/faillog
+cat /var/log/httpd/access_log
+cat /var/log/httpd/access.log
+cat /var/log/httpd/error_log
+cat /var/log/httpd/error.log
+cat /var/log/lastlog
+cat /var/log/lighttpd/access.log
+cat /var/log/lighttpd/error.log
+cat /var/log/lighttpd/lighttpd.access.log
+cat /var/log/lighttpd/lighttpd.error.log
+cat /var/log/messages
+cat /var/log/secure
+cat /var/log/syslog
+cat /var/log/wtmp
+cat /var/log/xferlog
+cat /var/log/yum.log
+cat /var/run/utmp
+cat /var/webmin/miniserv.log
+cat /var/www/logs/access_log
+cat /var/www/logs/access.log
+ls -alh /var/lib/dhcp3/
+ls -alh /var/log/postgresql/
+ls -alh /var/log/proftpd/
+ls -alh /var/log/samba/
+
+
+
+
+
+Note: auth.log, boot, btmp, daemon.log, debug, dmesg, kern.log, mail.info, mail.log, mail.warn, messages, syslog, udev, wtmp
+

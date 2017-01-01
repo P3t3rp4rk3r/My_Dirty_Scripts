@@ -1,0 +1,27 @@
+cat –  prints the content of a file in the terminal window
+
+cat /var/log/auth.log #Display File
+cat >test2		#Create File
+cat filename | more
+
+
+grep – searches and filters based on patterns
+
+dpkg –l | grep  python #Search python string in dpkg packages 
+ifconfig | grep –A 4 eth0
+ifconfig | grep -B 4 UP
+
+
+awk –  can sort each row into fields and display only what is needed
+
+awk '{print;}' awk.txt
+awk '{print $2,$5;}' awk.txt
+awk '$1 >200' awk.txt
+awk '$4 ~/Technology/' awk.txt
+
+sed –  performs find and replace functions
+sort – arranges outpu-t in an order
+uniq – compares adjacent lines and can report, filter or provide a count of duplicates
+
+
+

@@ -1,0 +1,174 @@
+Apache Log analysis:
+
+list all user agents ordered by no.of.times they appear: 
+
+awk -F\" '{print $6}' access_log | sort | uniq -c | sort -fr
+
+default separator which is any white-space (spaces or tabs) :
+
+awk '{print $1}' access_log         # ip address (%h)
+awk '{print $2}' access_log         # RFC 1413 identity (%l)
+awk '{print $3}' access_log         # userid (%u)
+awk '{print $4,5}' access_log       # date/time (%t)
+awk '{print $9}' access_log         # status code (%>s)
+awk '{print $10}' access_log        # size (%b)
+
+need to set the delimiter to the " character which changes the way the lines are 'exploded' and allows the following:
+
+awk -F\" '{print $2}' access_log    # request line (%r)
+awk -F\" '{print $4}' access_log    # referer
+awk -F\" '{print $6}' access_log    # user agent
+
+filtering the output narrow down on a certain page or referer.
+
+awk -F\" '($6 ~ /Googlebot/){print $2}' access_log | awk '{print $2}'
+
+who's been looking at your guestbook?
+
+	awk -F\" '($2 ~ /guestbook\.html/){print $6}' access_log
+
+
+
+
+# top 20 URLs from the last 5000 hits
+
+
+tail -5000 ./access_log | awk '{print $7}' | sort | uniq -c | sort -rn | head -20
+
+
+tail -5000 ./access_log | awk '{freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+
+
+ 
+
+
+# top 20 URLS excluding POST data from the last 5000 hits
+
+
+tail -5000 ./access_log | awk -F"[ ?]" '{print $7}' | sort | uniq -c | sort -rn | head -20
+
+
+tail -5000 ./access_log | awk -F"[ ?]" '{freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+
+
+ 
+
+
+# top 20 IPs from the last 5000 hits
+
+
+tail -5000 ./access_log | awk '{print $1}' | sort | uniq -c | sort -rn | head -20
+
+
+tail -5000 ./access_log | awk '{freq[$1]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+
+
+ 
+
+
+# top 20 URLs requested from a certain ip from the last 5000 hits
+
+
+IP=1.2.3.4; tail -5000 ./access_log | grep $IP | awk '{print $7}' | sort | uniq -c | sort -rn | head -20
+
+
+IP=1.2.3.4; tail -5000 ./access_log | awk -v ip=$IP ' $1 ~ ip {freq[$7]++} END {for (x in freq)
+
+
+# top 20 URLs from the last 5000 hits
+
+
+tail -5000 ./access_log | awk '{print $7}' | sort | uniq -c | sort -rn | head -20
+
+
+tail -5000 ./access_log | awk '{freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+
+
+ 
+
+
+# top 20 URLS excluding POST data from the last 5000 hits
+
+
+tail -5000 ./access_log | awk -F"[ ?]" '{print $7}' | sort | uniq -c | sort -rn | head -20
+
+
+tail -5000 ./access_log | awk -F"[ ?]" '{freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+
+
+ 
+
+
+# top 20 IPs from the last 5000 hits
+
+
+tail -5000 ./access_log | awk '{print $1}' | sort | uniq -c | sort -rn | head -20
+
+
+tail -5000 ./access_log | awk '{freq[$1]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+
+
+ 
+
+
+# top 20 URLs requested from a certain ip from the last 5000 hits
+
+
+IP=1.2.3.4; tail -5000 ./access_log | grep $IP | awk '{print $7}' | sort | uniq -c | sort -rn | head -20
+
+
+IP=1.2.3.4; tail -5000 ./access_log | awk -v ip=$IP ' $1 ~ ip {freq[$7]++} END {for (x in freq)
+
+
+# top 20 URLs from the last 5000 hits
+
+
+tail -5000 ./access_log | awk '{print $7}' | sort | uniq -c | sort -rn | head -20
+
+
+tail -5000 ./access_log | awk '{freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+
+
+ 
+
+
+# top 20 URLS excluding POST data from the last 5000 hits
+
+
+tail -5000 ./access_log | awk -F"[ ?]" '{print $7}' | sort | uniq -c | sort -rn | head -20
+
+
+tail -5000 ./access_log | awk -F"[ ?]" '{freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+
+
+# top 20 URLs from the last 5000 hits
+tail -5000 ./access_log | awk '{print $7}' | sort | uniq -c | sort -rn | head -20
+tail -5000 ./access_log | awk '{freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+ 
+# top 20 URLS excluding POST data from the last 5000 hits
+tail -5000 ./access_log | awk -F"[ ?]" '{print $7}' | sort | uniq -c | sort -rn | head -20
+tail -5000 ./access_log | awk -F"[ ?]" '{freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+ 
+# top 20 IPs from the last 5000 hits
+tail -5000 ./access_log | awk '{print $1}' | sort | uniq -c | sort -rn | head -20
+tail -5000 ./access_log | awk '{freq[$1]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+ 
+# top 20 URLs requested from a certain ip from the last 5000 hits
+IP=1.2.3.4; tail -5000 ./access_log | grep $IP | awk '{print $7}' | sort | uniq -c | sort -rn | head -20
+IP=1.2.3.4; tail -5000 ./access_log | awk -v ip=$IP ' $1 ~ ip {freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+ 
+# top 20 URLS requested from a certain ip excluding, excluding POST data, from the last 5000 hits
+IP=1.2.3.4; tail -5000 ./access_log | fgrep $IP | awk -F "[ ?]" '{print $7}' | sort | uniq -c | sort -rn | head -20
+IP=1.2.3.4; tail -5000 ./access_log | awk -F"[ ?]" -v ip=$IP ' $1 ~ ip {freq[$7]++} END {for (x in freq) {print freq[x], x}}' | sort -rn | head -20
+ 
+# top 20 referrers from the last 5000 hits
+tail -5000 ./access_log | awk '{print $11}' | tr -d '"' | sort | uniq -c | sort -rn | head -20
+tail -5000 ./access_log | awk '{freq[$11]++} END {for (x in freq) {print freq[x], x}}' | tr -d '"' | sort -rn | head -20
+ 
+# top 20 user agents from the last 5000 hits
+tail -5000 ./access_log | cut -d\  -f12- | sort | uniq -c | sort -rn | head -20
+ 
+# sum of data (in MB) transferred in the last 5000 hits
+tail -5000 ./access_log | awk '{sum+=$10} END {print sum/1048576}'
+
+

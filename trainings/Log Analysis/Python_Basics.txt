@@ -1,0 +1,229 @@
+###########################################
+# Python Basics Lesson 1: Simple Printing #
+###########################################
+
+>>> print 1
+
+>>> print hello
+
+>>> print "hello"
+ 
+>>> print "Today we are learning Python."
+ 
+ 
+ 
+###################################################
+# Python Basics Lesson 2: Simple Numbers and Math #
+###################################################
+ 
+>>> 2+2
+ 
+>>> 6-3
+ 
+>>> 18/7
+ 
+>>> 18.0/7
+ 
+>>> 18.0/7.0
+ 
+>>> 18/7
+ 
+>>> 9%4
+ 
+>>> 8%4
+ 
+>>> 8.75%.5
+ 
+>>> 6.*7
+ 
+>>> 6*6*6
+ 
+>>> 6**3
+ 
+>>> 5**12
+ 
+>>> -5**4
+ 
+ 
+ 
+ 
+ 
+ 
+#####################################
+# Python Basics Lesson 3: Variables #
+#####################################
+ 
+>>> x=18
+ 
+>>> x+15
+ 
+>>> x**3
+ 
+>>> y=54
+ 
+>>> x+y
+ 
+>>> age=input("Enter number here: ")
+        43
+ 
+>>> age+32
+ 
+>>> age**3
+
+>>> fname = raw_input("Enter your first name: ")
+
+>>> lname = raw_input("Enter your first name: ")
+
+>>> fname = raw_input("Enter your name: ")
+Enter your name: Hellboy
+
+>>> lname = raw_input("Enter your name: ")
+Enter your name: Santhosh
+
+>>> print fname
+Hellboy
+
+>>> print lname
+
+
+>>> print fname lname
+
+>>> print fname+lname
+
+
+ 
+ 
+NOTE:
+Use "input() for integers and expressions, and use raw_input() when you are dealing with strings. 
+ 
+ 
+ 
+ 
+ 
+#################################################
+# Python Basics Lesson 4: Modules and Functions #
+#################################################
+ 
+>>> 5**4
+ 
+>>> pow(5,4)
+ 
+>>> abs(-18)
+ 
+>>> abs(5)
+ 
+>>> floor(18.7)
+ 
+>>> import math
+ 
+>>> math.floor(18.7)
+ 
+>>> math.sqrt(81)
+ 
+>>> Hellboy = math.sqrt
+ 
+>>> Hellboy(9)
+ 
+>>> Hellboy=math.floor
+ 
+>>> Hellboy(19.8)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+###################################
+# Python Basics Lesson 5: Strings #
+###################################
+ 
+>>> "XSS"
+ 
+>>> 'SQLi'
+ 
+>>> "Hellboy's a python lover"
+ 
+>>> 'Hellboy\'s a python lover'
+ 
+>>> "Hellboy said \"InfoSec is fun\" to me"
+ 
+>>> a = "Hellboy"
+ 
+>>> b = "Hellman"
+ 
+>>> a, b
+ 
+>>> a+b
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+########################################
+# Python Basics Lesson 6: More Strings #
+########################################
+ 
+>>> num = 10
+ 
+>>> num + 2
+ 
+>>> "The number of open ports found on this system is " + num
+ 
+>>> num = str(18)
+ 
+>>> "There are " + num + " vulnerabilities found in this environment."
+ 
+>>> num2 = 46
+ 
+>>> "As of 08/20/2012, the number of states that enacted the Security Breach Notification Law is " + `num2`
+ 
+
+ 
+NOTE:
+Use "input() for integers and expressions, and use raw_input() when you are dealing with strings.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+###############################################
+# Python Basics Lesson 7: Sequences and Lists #
+###############################################
+ 
+>>> attacks = ['Stack Overflow', 'Heap Overflow', 'Integer Overflow', 'SQL Injection', 'Cross-Site Scripting', 'Remote File Include']
+ 
+>>> attacks
+['Stack Overflow', 'Heap Overflow', 'Integer Overflow', 'SQL Injection', 'Cross-Site Scripting', 'Remote File Include']
+ 
+>>> attacks[3]
+'SQL Injection'
+ 
+>>> attacks[-2]
+'Cross-Site Scripting'
+ 
+ 
+ 
+ 
+ 
+ 
+########################################
+# Python Basics Level 8: If Statement #
+########################################
+>>> attack="SQLI"
+>>> if attack=="SQLI":
+        print 'The attacker is using SQLI'
+ 
+>>> attack="XSS"
+>>> if attack=="SQLI":
+        print 'The attacker is using SQLI'
+
+ 
+
