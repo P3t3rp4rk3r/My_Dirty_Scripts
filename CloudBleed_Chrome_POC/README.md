@@ -22,4 +22,4 @@ Requirements:
 3. Existing /tmp/password.csv from the above steps.
 4. check.py from this project existing in /tmp/check.py
 
-Download CloudBleed_checker.py from here, and run it. It will download, unzip, and compare only the website name (with a little formatting) against the affected list. This password file should be *deleted* as soon as you are done (the script will not do this for you), and if in doubt - change any credentials that may have been revealed. Don't trust that the master list is valid, or that my novice attempts to deal with this didn't miss something important.
+Download checker.py from here, and run it. It will download, unzip, and compare only the website name (with a little formatting) against the affected list. This password file should be *deleted* as soon as you are done (the script will not do this for you), and if in doubt - change any credentials that may have been revealed. Don't trust that the master list is valid, or that my novice attempts to deal with this didn't miss something important.
