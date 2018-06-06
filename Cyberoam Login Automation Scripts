@@ -1,0 +1,114 @@
+# Cyberoam Web Access URL
+link="http://192.168.1.1:8090/login.xml"
+ 
+########################
+# Constant Hidden Form Fields
+isAccessDenied=""
+url=""
+message=""
+saveinfo="saveinfo"
+timestamp="$(date +%s)"
+########################
+# Variable Hidden Form Fields
+mode="193"
+btnSubmit="Logout"
+ 
+#######################
+# Login session check and using CLI cURL to send post data to logout Cyberoam
+if ls ~/.cyberoam-login.tmp &> /dev/null
+then
+    source ~/.cyberoam-login.tmp
+ 
+    zenity --question --title="Cyberoam Login" \
+    --text="You are logged in Cyberoam. \n\n\n Status \t\t Logged In \n Username \t $username" \
+    --ok-label "Logout" --cancel-label="Close" \
+    --width=300 --height=150 \
+    ; opt=`echo $?`
+ 
+    if [ $opt -eq 1 ]
+    then
+        exit
+    else
+        curl $link --data username="$username" --data password="$password" --data a="$timestamp" --data mode="$mode" --data producttype="0" --data btnSubmit="$btnSubmit" --data isAccessDenied="$isAccessDenied" --data url="$url" --data message="$message" --data saveinfo="$saveinfo" -k &> ~/.cyberoam-log.tmp
+       
+        if grep "logoutstatus=true" ~/.cyberoam-log.tmp > /dev/null
+        then
+            rm -f ~/.cyberoam-log.tmp ~/.cyberoam-login.tmp
+            exit
+        fi
+    fi
+fi
+ 
+########################
+# Variable Hidden Form Fields
+mode="191"
+btnSubmit="Login"
+ 
+########################
+# Login Variables Input
+if [ $# -eq 2 ]
+then
+    username="$1"
+    password="$2"
+else
+    username=`zenity --entry --title="Cyberoam Login" --width=300 --height=150 \
+    --text="Enter Username"`
+ 
+    if [ -z $username ]
+    then
+        exit
+    fi
+ 
+    password=`zenity --entry --title="Cyberoam Login" --width=300 --height=150 \
+    --text="Enter Password" --hide-text`
+ 
+    if [ -z $password ]
+    then
+        exit
+    fi
+fi
+ 
+#######################
+# Using CLI cURL to send post data to login Cyberoam
+curl $link --data username="$username" --data password="$password" --data a="$timestamp" --data producttype="0"  \
+--data mode="$mode" --data btnSubmit="$btnSubmit" \
+--data isAccessDenied="$isAccessDenied" --data url="$url" --data message="$message" --data saveinfo="$saveinfo" \
+-k &> ~/.cyberoam-log.tmp
+ 
+cnt=0
+ 
+while grep "loginstatus=false" ~/.cyberoam-log.tmp > /dev/null
+do
+    curl $link --data username="$username" --data password="$password" --data a="$timestamp" --data producttype="0"  \
+--data mode="$mode" --data btnSubmit="$btnSubmit" \
+--data isAccessDenied="$isAccessDenied" --data url="$url" --data message="$message" --data saveinfo="$saveinfo" \
+-k &> ~/.cyberoam-log.tmp
+ 
+    cnt=`expr $cnt + 1`
+ 
+    if [ $cnt -ge 5 ]
+    then
+        break
+    fi
+done
+ 
+if grep "loginstatus=true" ~/.cyberoam-log.tmp > /dev/null
+then
+    echo "username=$username" >> ~/.cyberoam-login.tmp
+ 
+    zenity --info --title="Cyberoam Login" \
+        --text="You are logged in Cyberoam. \n\n\n Status \t\t Logged In \n Username \t $username" \
+        --width=300 --height=150
+else
+    var=`grep "loginstatus" ~/.cyberoam-log.tmp | awk '{ print $2 }'`
+    len2=`echo ${var:88} | wc -c`
+ 
+    len_msg=`expr $len2 - 62`
+ 
+    msg=`echo ${var:89:$len_msg}`
+    err=`echo $msg | sed 's/+/ /g' | sed 's/%2C/,/g'`
+ 
+    zenity --info --title="Cyberoam Login" \
+    --text="$err" \
+    --width=300 --height=150
+fi
